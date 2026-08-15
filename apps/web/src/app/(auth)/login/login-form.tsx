@@ -7,19 +7,20 @@ import { loginAction, type AuthResult } from "@/lib/actions/auth";
 
 const initialState: AuthResult | null = null;
 
-export function LoginForm() {
+export function LoginForm({ redirectTo = "/dashboard" }: { redirectTo?: string }) {
   const router = useRouter();
   const [state, action, pending] = useActionState(loginAction, initialState);
 
   useEffect(() => {
     if (state && "ok" in state && state.ok) {
-      router.push("/dashboard");
+      router.push(redirectTo);
       router.refresh();
     }
-  }, [state, router]);
+  }, [state, router, redirectTo]);
 
   return (
     <form action={action} className="space-y-5 rounded-2xl border border-[var(--border)] bg-white p-8 shadow-card">
+      <input type="hidden" name="redirect" value={redirectTo} />
       {state && "error" in state ? (
         <p className="rounded-lg bg-red-50 px-4 py-3 text-sm font-medium text-red-700" role="alert">
           {state.error}

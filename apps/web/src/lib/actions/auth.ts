@@ -81,7 +81,8 @@ export async function loginAction(prevState: AuthResult | null, formData: FormDa
   }
 
   const redirectTo = formData.get("redirect")?.toString() ?? "/dashboard";
-  redirect(redirectTo);
+  const safeRedirect = redirectTo.startsWith("/") && !redirectTo.startsWith("//") ? redirectTo : "/dashboard";
+  redirect(safeRedirect);
 }
 
 export async function registerAction(prevState: AuthResult | null, formData: FormData): Promise<AuthResult> {

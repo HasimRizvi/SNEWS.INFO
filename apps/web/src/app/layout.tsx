@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Navbar, Footer } from "@snews/ui";
+import { createClient } from "@/lib/supabase/server";
+import { UserMenu } from "@/components/user-menu";
 
 export const metadata: Metadata = {
   title: {
@@ -27,13 +29,47 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  let profile: { full_name: string | null; avatar_url: string | null } | null = null;
+  if (user) {
+    const { data } = await supabase
+      .from("profiles")
+      .select("full_name, avatar_url")
+      .eq("id", user.id)
+      .maybeSingle();
+    profile = data;
+  }
+
+  const navUser = user
+    ? {
+        fullName: profile?.full_name ?? user.user_metadata?.full_name ?? null,
+        email: user.email ?? "",
+        avatarUrl: profile?.avatar_url ?? null,
+      }
+    : null;
+
   return (
     <html lang="en">
       <body className="flex min-h-screen flex-col">
-        <Navbar />
+        <Navbar
+          user={navUser}
+          userMenu={
+            navUser ? (
+              <UserMenu
+                fullName={navUser.fullName}
+                email={navUser.email}
+                avatarUrl={navUser.avatarUrl}
+              />
+            ) : undefined
+          }
+        />
         <main className="flex-1">{children}</main>
         <Footer />
       </body>

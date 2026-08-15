@@ -34,3 +34,5 @@ supabase/.temp/
 
 # Next.js build cache
 *.tsbuildinfo
+.vercel
+.env*

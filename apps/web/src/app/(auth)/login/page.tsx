@@ -7,7 +7,12 @@ export const metadata: Metadata = {
   description: "Sign in to SNEWS.INFO to register for events and join the community.",
 };
 
-export default function LoginPage() {
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ redirect?: string }>;
+}) {
+  const redirectTo = (await searchParams).redirect ?? "/dashboard";
   return (
     <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-[var(--surface)] px-4 py-16">
       <div className="w-full max-w-md">
@@ -19,7 +24,7 @@ export default function LoginPage() {
             Sign in to register for events and grow with the community.
           </p>
         </div>
-        <LoginForm />
+        <LoginForm redirectTo={redirectTo} />
         <p className="mt-6 text-center text-sm text-muted">
           New to SNEWS?{" "}
           <Link href="/register" className="font-semibold text-[var(--accent)] hover:underline">

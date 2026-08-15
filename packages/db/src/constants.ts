@@ -1,6 +1,14 @@
 export const USER_ROLES = ["student", "teacher", "college", "organizer", "admin"] as const;
 export type UserRole = (typeof USER_ROLES)[number];
 
+export const USER_ROLE_LABELS: Record<UserRole, string> = {
+  student: "Student",
+  teacher: "Teacher",
+  college: "College / Institution",
+  organizer: "Event Organizer",
+  admin: "Admin",
+};
+
 export const EVENT_TYPES = [
   "hackathon",
   "problem-solving",

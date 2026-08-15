@@ -12,6 +12,8 @@ export interface Database {
           full_name: string | null;
           college_id: string | null;
           is_verified: boolean;
+          bio: string | null;
+          avatar_url: string | null;
           created_at: string;
           updated_at: string;
         };
@@ -23,8 +25,35 @@ export interface Database {
           full_name?: string | null;
           college_id?: string | null;
           is_verified?: boolean;
+          bio?: string | null;
+          avatar_url?: string | null;
         };
         Update: Partial<Database["public"]["Tables"]["profiles"]["Insert"]>;
+        Relationships: [];      };
+      student_profiles: {
+        Row: {
+          user_id: string;
+          branch: string | null;
+          year: number | null;
+          skills: string[];
+          portfolio_url: string | null;
+          headline: string | null;
+          resume_url: string | null;
+          resume_name: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          user_id: string;
+          branch?: string | null;
+          year?: number | null;
+          skills?: string[];
+          portfolio_url?: string | null;
+          headline?: string | null;
+          resume_url?: string | null;
+          resume_name?: string | null;
+        };
+        Update: Partial<Database["public"]["Tables"]["student_profiles"]["Insert"]>;
         Relationships: [];      };
       events: {
         Row: {

@@ -17,6 +17,8 @@ export interface DatabaseUser {
   full_name: string | null;
   college_id: string | null;
   is_verified: boolean;
+  bio: string | null;
+  avatar_url: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -27,6 +29,9 @@ export interface StudentProfile {
   year: number | null;
   skills: string[];
   portfolio_url: string | null;
+  headline: string | null;
+  resume_url: string | null;
+  resume_name: string | null;
   created_at: string;
   updated_at: string;
 }

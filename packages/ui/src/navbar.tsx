@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 
 const NAV_LINKS = [
   { href: "/events", label: "Events" },
@@ -8,7 +9,13 @@ const NAV_LINKS = [
   { href: "/resources", label: "Opportunities" },
 ] as const;
 
-export function Navbar() {
+export interface NavbarProps {
+  user?: { fullName: string | null; email: string; avatarUrl: string | null } | null;
+  userMenu?: ReactNode;
+}
+
+export function Navbar({ user = null, userMenu }: NavbarProps) {
+  const isSignedIn = Boolean(user) && Boolean(userMenu);
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-white/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
@@ -40,18 +47,24 @@ export function Navbar() {
           >
             + Post event
           </Link>
-          <Link
-            href="/login"
-            className="text-sm font-semibold text-[var(--navy)] transition-colors hover:text-[var(--accent)]"
-          >
-            Sign in
-          </Link>
-          <Link
-            href="/register"
-            className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[var(--accent-dark)]"
-          >
-            Join free
-          </Link>
+          {isSignedIn ? (
+            userMenu
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="text-sm font-semibold text-[var(--navy)] transition-colors hover:text-[var(--accent)]"
+              >
+                Sign in
+              </Link>
+              <Link
+                href="/register"
+                className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[var(--accent-dark)]"
+              >
+                Join free
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </header>
