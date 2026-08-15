@@ -1,0 +1,18 @@
+{
+  "name": "@snews/ai",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Modular AI layer: Gemini REST client, event classification, verification scoring. Never a single point of failure.",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@snews/db": "*"
+  },
+  "devDependencies": {
+    "@snews/config": "*",
+    "typescript": "^5.7.2"
+  }
+}

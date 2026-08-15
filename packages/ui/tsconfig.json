@@ -1,0 +1,7 @@
+{
+  "extends": "@snews/config/tsconfig/react-library.json",
+  "compilerOptions": {
+    "jsx": "react-jsx"
+  },
+  "include": ["src"]
+}

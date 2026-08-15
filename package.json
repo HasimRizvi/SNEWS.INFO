@@ -1,0 +1,31 @@
+{
+  "name": "snews",
+  "private": true,
+  "version": "0.1.0",
+  "description": "SNEWS.INFO — Student Opportunity & Innovation Network. Monorepo: Next.js web app + shared packages (ui, db, ai) + Supabase schema.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "web:dev": "npm run dev --workspace=@snews/web",
+    "web:build": "npm run build --workspace=@snews/web",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,sql,css}\"",
+    "db:init": "node scripts/apply-schema.mjs",
+    "check:setup": "node scripts/check-setup.mjs"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "tsx": "^4.23.12",
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "packageManager": "npm@11.17.0"
+}
