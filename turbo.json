@@ -1,7 +1,12 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
-  "globalEnv": ["NODE_ENV"],
+  "globalEnv": [
+    "NODE_ENV",
+    "SUPABASE_SERVICE_ROLE_KEY",
+    "GEMINI_API_KEY",
+    "GEMINI_MODEL"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
